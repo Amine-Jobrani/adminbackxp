@@ -52,7 +52,7 @@ export const getElectionCandidates = async (req, res) => {
     const { electionId } = req.params;
     
     try {
-      const candidates = await Election.find({ electionId: electionId });
+      const candidates = await Candidate.find({ electionId: electionId });
       res.json(candidates);
     } catch (error) {
       res.status(500).json({ message: error.message });
