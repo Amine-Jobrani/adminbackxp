@@ -48,25 +48,14 @@ export const importCandidatesByElectionId = async (req, res) => {
     }
 };
 
-// Example of getElectionCandidates with enhanced error handling and logging
 export const getElectionCandidates = async (req, res) => {
-    const { id } = req.params;
-  
+    const { electionId } = req.params;
+    
     try {
-      // Fetch election details by electionId
-      console.log('Fetching election with id:', id);
-      const election = await Election.findById(id);
-  
-
-  
-      // Fetch candidates for the specified election
-      const candidates = await Candidate.find({ electionId: id });
-  
-      // Respond with candidates data
+      const candidates = await Election.find({ electionId: electionId });
       res.json(candidates);
     } catch (error) {
-      console.error('Error fetching election candidates:', error);
-      res.status(500).json({ message: 'Failed to fetch election candidates', error: error.message });
+      res.status(500).json({ message: error.message });
     }
   };
   
