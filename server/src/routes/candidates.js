@@ -1,17 +1,16 @@
 import express from "express";
 import multer from 'multer';
-import { importCandidatesByElectionId } from '../controllers/candidateImportController.js';
-const router = express.Router();
+import { importCandidatesByElectionId, getElectionCandidates } from '../controllers/candidateImportController.js';
 import { requireAuth } from '../middlewares/authMiddleware.js';
 
-
-
+const router = express.Router();
 
 const upload = multer({ dest: 'uploads/' });
 
-// Candidates import by election
-router.post('/:electionId',requireAuth , upload.single('file'), importCandidatesByElectionId);
+
+router.post('/:electionId', requireAuth, upload.single('file'), importCandidatesByElectionId);
 
 
+router.get('/:electionId/candidates', requireAuth, getElectionCandidates);
 
 export default router;

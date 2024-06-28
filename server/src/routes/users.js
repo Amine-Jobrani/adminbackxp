@@ -1,6 +1,6 @@
 import express from 'express';
 import multer from 'multer';
-import { importUsersByElectionId, getAllUsers, getUserById } from '../controllers/userImportController.js';
+import { getUsersByElectionId, importUsersByElectionId, getAllUsers, getUserById } from '../controllers/userImportController.js';
 import { requireAuth } from '../middlewares/authMiddleware.js';
 
 
@@ -13,6 +13,7 @@ router.get("/",requireAuth,  getAllUsers);
 
 router.get("/:id",requireAuth, getUserById);
 
+router.get('/users/election/:electionId',requireAuth,  getUsersByElectionId);
 
 
 
